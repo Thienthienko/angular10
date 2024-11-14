@@ -7,18 +7,17 @@ import { Message } from '../../models/message.model';
   standalone: true,
   imports: [FormsModule],
   templateUrl: './contact-form.component.html',
-  styleUrl: './contact-form.component.scss'
+  styleUrl: './contact-form.component.scss',
 })
 export class ContactFormComponent {
-
   newMessage: Message = {
-    lastname: "",
-    firstname: "",
-    email: "",
-    content: ""
+    lastname: '',
+    firstname: '',
+    email: '',
+    content: '',
   };
 
   onSubmit(): void {
-    console.log(newMessage.value);
+    console.log(this.newMessage.email);
   }
 }

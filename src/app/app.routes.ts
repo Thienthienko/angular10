@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { HomePageComponent } from './pages/home-page/home-page.component';
 import { ArticlePageComponent } from './pages/article-page/article-page.component';
-import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { ContactPageComponent } from './pages/contact-page/contact-page.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { SignupPageComponent } from './pages/signup-page/signup-page.component';
 
 export const routes: Routes = [
@@ -12,11 +12,7 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: '**',
-    component: NotFoundPageComponent
-  },
-  {
-    path: 'article/id',
+    path: 'article/:id',
     component: ArticlePageComponent,
   },
   {
@@ -25,6 +21,10 @@ export const routes: Routes = [
   },
   {
     path: 'signup',
-    component: SignupPageComponent
-  }
+    component: SignupPageComponent,
+  },
+  {
+    path: '**',
+    component: NotFoundPageComponent,
+  },
 ];
