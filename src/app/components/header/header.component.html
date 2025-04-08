@@ -3,10 +3,20 @@
     <span class="header-logo">Jane DOE</span>
     <nav class="header-nav">
       <a [routerLink]="['/']">Accueil</a>
-      <a href="#">Article</a>
-      <a href="#">L'École</a>
       <a [routerLink]="['/contact']">Contact</a>
-      <button class="header-button" (click)="navigateTo()">M'inscrire</button>
+
+      @if(!isLogged) {
+        <a [routerLink]="['/signup']">Sign up</a>
+        <a [routerLink]="['/login']">Login</a>
+      } @if(isLogged) {
+      <a [routerLink]="['/profile']">Profile</a>
+
+      @if(isLogged && isAdmin) {
+        <a [routerLink]="['/admin']">Admin</a>
+      }
+      <button class="header-button" (click)="logout()">Logout</button>
+
+    }
     </nav>
   </div>
   <div class="header-title">
