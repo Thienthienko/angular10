@@ -4,6 +4,7 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { Article } from '../../models/article.model';
+import { ApiService } from '../../services/api.service';
 
 @Component({
   selector: 'app-article-page',
@@ -14,30 +15,42 @@ import { Article } from '../../models/article.model';
 })
 export class ArticlePageComponent {
   private route: ActivatedRoute = inject(ActivatedRoute);
-  private http = inject(HttpClient);
+  private apiService = inject(ApiService);
+
   articlesId!: number;
   article$!: Observable<Article>;
-  private articleSubscription!: Subscription;
-  articles: Article[] = [];
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: ParamMap) => {
       this.articlesId = Number(params.get('id'));
-      this.article$ = this.getArticleById(this.articlesId);
-
-      this.articleSubscription = this.http
-        .get<Article[]>('http://localhost:3000/articles')
-        .subscribe((data) => {
-          this.articles = data;
-        });
+      this.article$ = this.apiService.getArticleById(this.articlesId);
     });
   }
 
-  ngOnDestroy() {
-    this.articleSubscription.unsubscribe();
-  }
+  // private http = inject(HttpClient);
+  // articlesId!: number;
+  // article$!: Observable<Article>;
+  // private articleSubscription!: Subscription;
+  // articles: Article[] = [];
 
-  getArticleById(id: number): Observable<Article> {
-    return this.http.get<Article>(`http://localhost:3000/articles/${id}`);
-  }
+  // ngOnInit(): void {
+  //   this.route.paramMap.subscribe((params: ParamMap) => {
+  //     this.articlesId = Number(params.get('id'));
+  //     this.article$ = this.getArticleById(this.articlesId);
+
+  //     this.articleSubscription = this.http
+  //       .get<Article[]>('http://localhost:3000/articles')
+  //       .subscribe((data) => {
+  //         this.articles = data;
+  //       });
+  //   });
+  // }
+
+  // ngOnDestroy() {
+  //   this.articleSubscription.unsubscribe();
+  // }
+
+  // getArticleById(id: number): Observable<Article> {
+  //   return this.http.get<Article>(`http://localhost:3000/articles/${id}`);
+  // }
 }
