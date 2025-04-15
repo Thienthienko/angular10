@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Article } from '../models/article.model';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 @Injectable({
   providedIn: 'root',

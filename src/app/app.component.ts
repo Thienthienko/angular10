@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import { RouterOutlet} from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 
@@ -10,6 +10,17 @@ import { HeaderComponent } from './components/header/header.component';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'wild-blog';
+  title = 'WILD BLOG';
 
+  changeTitle() {
+    this.title = 'NEW WILD BLOG';
+  }
+
+
+  @Input() message: string ='';
+  @Output() notify = new EventEmitter<string>();
+
+  sendNotification() {
+    this.notify.emit('Hello parent!');
+  }
 }
